@@ -7,7 +7,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
@@ -64,14 +66,22 @@ fun MainApp(modifier: Modifier = Modifier) {
             text = "$$counter",
             style = TextStyle(color = Color.White, fontWeight = FontWeight.Bold, fontSize = 32.sp),
         )
-        Card(modifier = modifier.size(120.dp).clickable { counter++ }.shadow(elevation = 4.dp), shape = CircleShape) {
-            Text(
-                modifier = Modifier.background(Color.White)
-                    .fillMaxSize().wrapContentSize(align = Alignment.Center),
-                text = "Tap",
-                style = TextStyle(color = Color.Black, fontWeight = FontWeight.Bold, fontSize = 16.sp),
-            )
+        Spacer(modifier = Modifier.height(32.dp))
+        TapView {
+            counter++
         }
+    }
+}
+
+@Composable
+fun TapView(updateCounter: () -> Unit) {
+    Card(modifier = Modifier.size(120.dp).clickable { updateCounter() }.shadow(elevation = 4.dp), shape = CircleShape) {
+        Text(
+            modifier = Modifier.background(Color.White)
+                .fillMaxSize().wrapContentSize(align = Alignment.Center),
+            text = "Tap",
+            style = TextStyle(color = Color.Black, fontWeight = FontWeight.Bold, fontSize = 16.sp),
+        )
     }
 }
 
